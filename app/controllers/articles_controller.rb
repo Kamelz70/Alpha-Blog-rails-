@@ -1,8 +1,9 @@
 class ArticlesController < ApplicationController
+  #applies middleware before the actions specified in only
+  before_action :set_article, only: [:show,:edit,:update,:destroy]
   def show
-    @article = Article.find(params[:id])
   end
-
+  
   def index
     # byebug
     @articles = Article.all
@@ -13,7 +14,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(get_article_data)
     if @article.save
       flash[:notice] = 'Article created!' # or :alert
       redirect_to article_path(@article)
@@ -24,17 +25,31 @@ class ArticlesController < ApplicationController
   end
 
   def edit
-    @article = Article.find(params[:id])
   end
 
   def update
-    @article = Article.find(params[:id])
-    if @article.update(params.require(:article).permit(:title, :description))
-      flash[:notice] = 'Article created!' # or :alert
+    if @article.update(get_article_data)
+      flash[:notice] = 'Article edited!' # or :alert
       redirect_to @article
     else
       flash[:notice] = 'Article was not created!' # or :alert
       render "edit"
     end
+  end
+
+  def destroy
+    @article.destroy
+    redirect_to articles_path
+  end
+
+  #makes definitions after private
+  private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def get_article_data
+    params.require(:article).permit(:title, :description)
   end
 end

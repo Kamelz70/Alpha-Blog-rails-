@@ -1,0 +1,9 @@
+<h1>New User Registration</h1>
+
+<% if @user.errors.any? %>
+  <h2>An error Occurred</h2>
+  <% @user.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+<% end %>
+<%= render 'form' %>

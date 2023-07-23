@@ -15,7 +15,7 @@
 <div style="text-align:center;margin:2rem auto">
 <%= link_to 'Articles Index', articles_path %>
 <% if logged_in? %>
-<%= link_to current_user.username, user_path(current_user) %>
+<%= "Admin" if current_user.admin? %><%= link_to current_user.username, user_path(current_user) %>
 <%= link_to 'Logout', logout_path, data: { "turbo-method": :delete } %>
 
 <% else %>

@@ -4,7 +4,7 @@
   <p><strong>email:</strong><%=@user.email%></p>
   <div style="display:block">
   <%= gravatar_for @user, size:200 %>
-  <% if logged_in? && current_user==@user %>
+  <% if logged_in? && (current_user==@user  || current_user.admin?) %>
   <%= link_to "Edit your profile", edit_user_path(@user) %>
   <%= link_to "Delete your profile", user_path(@user) ,data: {"confirm":"Are you sure?" ,"turbo-method": :delete }%>
   <% end %>

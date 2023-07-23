@@ -1,0 +1,18 @@
+<div style="text-align:center">
+  <h1>Showing Users</h1>
+
+  <% @users.each do |user| %>
+  
+  <div style="text-align:center;margin:2rem auto;">
+  <%= link_to user.username, user %>
+  <div style="display:block;text-align:center">
+    <%= gravatar_for(user,size:180)%>
+  </div>
+
+  <%= pluralize(user.articles.count,"Article") %>
+  <%= link_to 'Edit', edit_user_path(user) %>
+  <% end %>
+  </div>
+<%= will_paginate @users %>
+ 
+</div>

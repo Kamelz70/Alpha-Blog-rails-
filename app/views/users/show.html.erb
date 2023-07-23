@@ -1,0 +1,34 @@
+<div style="text-align:center;width:100%;">
+  <h1>Showing User details</h1>
+  <p><strong>Name:</strong><%=@user.username%></p>
+  <p><strong>email:</strong><%=@user.email%></p>
+  <div style="display:block">
+  <%= gravatar_for @user, size:200 %>
+  <% if logged_in? && current_user==@user %>
+  <%= link_to "Edit your profile", edit_user_path(@user) %>
+  <%= link_to "Delete your profile", user_path(@user) ,data: {"confirm":"Are you sure?" ,"turbo-method": :delete }%>
+  <% end %>
+
+  </div>
+  <h1>Articles</h1>
+  <table style="margin:auto">
+<thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th clospan="3">Actions</th>
+  </tr>
+</thead>
+<tbody>
+
+  <% @articles.each do |article| %>
+    <%= render 'articles/article', article: article %>
+
+  <% end %>
+</tbody>
+</table>
+</ul>
+
+  <%= link_to 'Edit', edit_user_path(@user) %>
+  <%= link_to 'Show Index', users_path %>
+</div>

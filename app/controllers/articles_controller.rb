@@ -1,12 +1,14 @@
 class ArticlesController < ApplicationController
   #applies middleware before the actions specified in only
   before_action :set_article, only: [:show,:edit,:update,:destroy]
+  before_action :require_user, except: [:show,:index]
+  before_action :require_same_user, only: [:edit,:destroy,:update]
   def show
   end
   
   def index
-    # byebug
-    @articles = Article.all
+    @articles = Article.paginate(page: params[:page], per_page: 8)
+
   end
 
   def new
@@ -15,6 +17,7 @@ class ArticlesController < ApplicationController
 
   def create
     @article = Article.new(get_article_data)
+    @article.user=current_user
     if @article.save
       flash[:notice] = 'Article created!' # or :alert
       redirect_to article_path(@article)
@@ -51,5 +54,12 @@ class ArticlesController < ApplicationController
 
   def get_article_data
     params.require(:article).permit(:title, :description)
+  end
+  
+  def require_same_user
+    if current_user != @article.user
+      flash[:notice] ="You must be the publisher to perform this action"
+      redirect_to articles_path
+    end
   end
 end

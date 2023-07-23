@@ -1,6 +1,7 @@
-<ul>
-<p>hi</p>
-<table>
+
+<h1>Showing Articles</h1>
+
+<table style="margin:auto">
 <thead>
   <tr>
     <th>Title</th>
@@ -11,16 +12,14 @@
 <tbody>
 
   <% @articles.each do |article| %>
-  <tr>
-    <td><%= article.title %></td>
-    <td><%= article.description %></td>
-    <td><%= link_to 'Show', article_path(article) %></td>
-    <td><%= link_to 'Edit', edit_article_path(article) %></td>
-    <td><%= link_to 'Delete', article_path(article), method: :delete , data: { confirm:"Are you sure?" } %></td>
-  </tr>
+    <%= render 'article', article: article %>
   <% end %>
 </tbody>
 </table>
 </ul>
-
-<%= link_to "New Article", new_article_path %>
+<div class="flickr_pagination" style="text-align:center;margin:auto">
+    <%= will_paginate @articles %>
+  </div>
+<% if logged_in? %>
+  <%= link_to "New Article", new_article_path %>
+<% end %>

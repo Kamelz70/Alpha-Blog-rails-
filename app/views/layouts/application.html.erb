@@ -13,7 +13,8 @@
   <body>
   
 <div style="text-align:center;margin:2rem auto">
-<%= link_to 'Articles Index', articles_path %>
+<%= link_to 'home', root_path %>
+<%= link_to 'Articles', articles_path %>
 <% if logged_in? %>
 <%= "Admin" if current_user.admin? %><%= link_to current_user.username, user_path(current_user) %>
 <%= link_to 'Logout', logout_path, data: { "turbo-method": :delete } %>
@@ -22,6 +23,11 @@
 <%= link_to 'SignUp', signup_path %>
 <%= link_to 'Login', login_path %>
 
+<% end %>
+<%= link_to 'Categories', categories_path %>
+
+<% if current_user.admin? %>
+<%= link_to "Create Category", new_category_path %>
 <% end %>
 
 <%= link_to 'Users Index', users_path %>

@@ -1,0 +1,21 @@
+<h1>Showing Categories</h1>
+
+
+
+<table style="margin:auto">
+  <thead>
+    <tr>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <% @categories.each do |category| %>
+      <%= render 'category', category: category %>
+    <% end %>
+  </tbody>
+  </table>
+  </ul>
+  <div class="flickr_pagination" style="text-align:center;margin:auto">
+      <%= will_paginate @categories %>
+    </div>

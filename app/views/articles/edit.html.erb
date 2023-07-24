@@ -1,10 +1,5 @@
 <h1>Edit Article</h1>
 
-<% if @article.errors.any? %>
-  <h2>An error Occurred</h2>
-  <% @article.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>
-<% end %>
+<%= render 'shared/errors' ,obj:@article%>
 <%= render 'form' %>
 <%= link_to 'Cancel', articles_path %>

@@ -1,2 +1,30 @@
 <h1>Showing Category</h1>
 <p>name: <%= @category.name %></p>
+
+<div style="text-align:center;width:100%;">
+  <% if logged_in? && (current_user.admin?) %>
+  <%= link_to "Edit Category Name", edit_category_path(@category) %>
+  <%= link_to "Delete Category", category_path(@category) ,data: {"confirm":"Are you sure?" ,"turbo-method": :delete }%>
+  <% end %>
+
+  </div>
+  <h1>Articles</h1>
+  <table style="margin:auto">
+<thead>
+  <tr>
+    <th>Title</th>
+    <th>Description</th>
+    <th clospan="3">Actions</th>
+  </tr>
+</thead>
+<tbody>
+
+  <% @articles.each do |article| %>
+    <%= render 'articles/article', article: article %>
+
+  <% end %>
+  <%= will_paginate @articles, :container => false %>
+</tbody>
+</table>
+</ul>
+</div>

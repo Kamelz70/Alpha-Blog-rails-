@@ -11,7 +11,11 @@
   <tbody>
   
     <% @categories.each do |category| %>
-      <%= render 'category', category: category %>
+      <%= render 'category', category: category %> 
+          <tr>
+    <td>
+    <%= pluralize(category.articles.count,"article") %>
+    </tr>
     <% end %>
   </tbody>
   </table>

@@ -11,6 +11,12 @@
   </p>
   
   <p>
+  <%= f.label :categories %>
+  <%= f.collection_select(:category_ids, Category.all, :id, :name,
+  {prompt: "Make selection"},{multiple: true}) %> 
+  </p>
+  
+  <p>
   <%= f.submit %>
   </p>
 <% end %>

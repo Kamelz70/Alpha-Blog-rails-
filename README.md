@@ -1,24 +1,11 @@
-# README
+# Rails Alpha Blog App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a Ruby-on-rails app that implements user authentication, and multiple data models to present to users a blog posting platform
 
-Things you may want to cover:
+Each user when signed up has a user profile which he can edit, upload avatar photo, and see all his blog postings.
 
-* Ruby version
+The app uses middle-ware to enable only users to edit/delete their blog posts, and admins to delete them
 
-* System dependencies
+The app has an index of all blog posts with each username post publisher
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+CRUD opereations are applied for all data models and handled by the controllers
